@@ -6,3 +6,4 @@
     - For Mac users: Run sudo npm i  @vue/cli -g
 3. Run vue --version and ensure vue is installednpm update -g @vue/cli
     - If this step fails, re-run step 2 until Vue is successfully installed
+4. Run npm install bootstrap-vue
