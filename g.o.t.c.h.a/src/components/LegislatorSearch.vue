@@ -5,13 +5,54 @@
             <template v-slot:prepend>
                 <b-form-select placeholder="Select:" v-model="selected" :options="searchType"></b-form-select>
             </template>
-            <b-form-input></b-form-input>
+            <b-form-input v-model="input"></b-form-input>
             <template v-slot:append>
-                <b-button @click=search() variant="info">Search</b-button>
+                <b-button v-b-modal.info @click=search() variant="info">Search</b-button>
             </template>
         </b-input-group>
         </b-col>
-        <b-modal v-if="showModal">
+        <b-modal id="info" :title="currentName">
+            <div>
+                <b-tabs content-class="mt-3" align="center">
+                    <b-tab title="Info" active>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">Position:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['position']}}</b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">Party:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['party']}}</b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">State:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['state']}}</b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">District:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['district']}}</b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">Address:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['address']}}</b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">Phone Number:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['phone']}}</b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">Facebook:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['facebook']}}</b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col style="text-align:right; font-weight:bold; color:#42b983">Twitter:</b-col>
+                            <b-col style="text-align:left; color:#2c3e50">{{currentLegislator['twitter']}}</b-col>
+                        </b-row>
+                    </b-tab>
+                    <b-tab title="Sponsorships">
+                        
+                    </b-tab>
+                </b-tabs>
+            </div>
         </b-modal>
     </div>
 </template>
@@ -24,6 +65,7 @@ export default {
     data() {
         return{
             selected: null, 
+            input: "", 
             searchType: [
                 {value: 'name', text: 'Full Name'},
             ],
@@ -31,7 +73,9 @@ export default {
             dataLoaded: false,
             legislatorNames: [],
             legislators: {}, 
-            showModal: false
+            showModal: false,
+            currentLegislator: {},
+            currentName: "Legislator Not Found!"
         }
     },
     created() {
@@ -57,6 +101,23 @@ export default {
     methods: {
         search() {
             this.showModal = true; 
+            console.log(this.input, this.selected)
+            try {
+                this.currentLegislator = this.legislators[this.input];
+                this.currentName = this.currentLegislator['full_name'];
+                if(this.currentLegislator['senate_class'] != null) {
+                    this.currentLegislator['position'] = "Senator";
+                    this.currentLegislator['district'] = "Not Applicable";
+                } 
+                else {
+                    this.currentLegislator['position'] = "Representative";
+                }
+            }
+            catch (error) {
+                this.currentLegislator = {};
+                this.currentName = "Legislator Not Found!";
+            }
+            console.log(this.currentLegislator)
         }
     }
 }

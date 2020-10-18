@@ -96,14 +96,6 @@ class RSSFeedMain:
             # writing data rows 
             writer.writerows(bill_items) 
 
-
-    def convertToJson(self, data, extendData):
-        billsDict = {}
-        billsDict[data] = extendData
-        with open('bills.txt', 'w') as outfile:
-            json.dump(data, outfile)
-
-
     def readCSV(self, csvfile):
         df = pd.read_csv(csvfile)
         df['guid'] = df.apply(lambda x : x['guid'][11:], axis=1)
@@ -163,9 +155,11 @@ class RSSFeedMain:
         return legislators
 
 
-    def convertToJson(self, data, extendData):
-        billsDict = {}
-        billsDict[data] = extendData
+    def convertToJson(self):
+        data = self.legisToBill
+        jsonObject = json.dumps(data, indent = 4)
+        return jsonObject
+        print(jsonObject)
         with open('bills.txt', 'w') as outfile:
             json.dump(data, outfile)
 
@@ -185,9 +179,10 @@ def main():
         #.     convertToJson(data, extendData)
     print(feed.mapToBill(datas))
     '''
-    print("billToLegis: ", feed.billToLegis)
-    print()
-    print("legisToBill: ", feed.legisToBill)
+    #print("billToLegis: ", feed.billToLegis)
+    #print()
+    #print("legisToBill: ", feed.legisToBill)
+    feed.convertToJson()
 
 
 if __name__ == '__main__':
