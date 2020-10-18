@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 from legislator import Legislator as leg
+from RSSFeed import RSSFeedMain as bill
 
 # configuration
 DEBUG = True
