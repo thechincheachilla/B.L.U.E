@@ -32,9 +32,9 @@
               <b-col md="6">
                 <b-card-body title="Reiden Chea">
                   <b-card-text>
-                    Reiden is a sophomore majoring in computer science. He serves as the chair of 
-                    Oversight within ASUW Senate. When he's not breaking national records in powerlifting,
-                    he enjoys 3-D printing and making orea rice.
+                    Reiden is a second year computer science major and math minor. He serves as the chair of 
+                    Oversight within ASUW Senate, and when he's not breaking national records in powerlifting,
+                    he enjoys 3D printing and making a good ol' bowl of oreo rice.
                   </b-card-text>
                 </b-card-body>
               </b-col>
@@ -48,9 +48,9 @@
               <b-col md="6">
                 <b-card-body title="Jennifer Fernandez">
                   <b-card-text>
-                    Jennifer -- but her friends call her Jen -- is a sophomore majoring in computer science
+                    Jennifer -- but her best friends call her Jen -- is a sophomore majoring in computer science
                     and minoring in both physics and math. A talented and skilled figure skater, she was a 
-                    top competitor the national figure skating team of the Philipines.
+                    top competitor in the national figure skating team of the Philipines.
                   </b-card-text>
                 </b-card-body>
               </b-col>
