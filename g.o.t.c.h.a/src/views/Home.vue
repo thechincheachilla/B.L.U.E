@@ -27,38 +27,6 @@
               </b-card-text>
               <b-button variant="info" to="/legislation">Search</b-button>
             </b-card>
-          
-             <b-card img-src="https://placekitten.com/1000/300" img-alt="Card image" img-bottom>
-                <b-card-text>
-                  Jennefir.
-                </b-card-text>
-            </b-card>
-
-             <b-card img-src="https://placekitten.com/1000/300" img-alt="Card image" img-bottom>
-                <b-card-text>
-                  Hoy.
-                </b-card-text>
-            </b-card>
-
-
-             <b-card img-src="https://placekitten.com/1000/300" img-alt="Card image" img-bottom>
-                <b-card-text>
-                  Reiden.
-                </b-card-text>
-            </b-card>
-
-
-             <b-card img-src="https://placekitten.com/1000/300" img-alt="Card image" img-bottom>
-                <b-card-text>
-                  Anson.
-                </b-card-text>
-            </b-card>
-
-             <b-card img-src="https://placekitten.com/1000/300" img-alt="Card image" img-bottom>
-                <b-card-text>
-                  Jared.
-                </b-card-text>
-            </b-card>
 
           </b-card-group>
         </div>
