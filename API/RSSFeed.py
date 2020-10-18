@@ -13,9 +13,9 @@ def loadXML(url, filename, final_filename, singleOr100):
     with open(filename, 'wb') as file: 
         file.write(response.content) 
     if singleOr100 == '100':
-        parseXML(filename, final_filename)
+        return parseXML(filename, final_filename)
     elif singleOr100 == 'single':
-        parseXMLSponsor(filename)
+        return parseXMLSponsor(filename)
 
 
 
@@ -93,8 +93,8 @@ def readCSV(csvfile):
     return df['guid'].tolist()
 
 def extractSponsors(csv):
-	bills = {}
-	for guid in csv:
+    bills = {}
+    for guid in csv:
         guid = csv[0]
         url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/hr/BILLSTATUS-116' + guid + '.xml'
         bills[guid] = loadXML(url, "bill_sponsors.xml", "sponsor_names.csv", "single")
