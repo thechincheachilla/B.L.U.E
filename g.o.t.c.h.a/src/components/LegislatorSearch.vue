@@ -25,21 +25,45 @@ export default {
     data() {
         return{
             legType: "Legislator Type:",
-            legislatorData: {}
+            legislatorData: {},
+            dataLoaded: false,
+            legislators: {},
+            legislatorNames: []
         }
     },
-    created: {
-        getLegislators() {
-            const path = 'http://localHost:5000/getLegislators';
-            axios.get(path)
-                .then((res) => {
-                    this.legislatorData = res.data;
-                    console.log(this.legislatorData);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        },
+    created() {
+        const path = 'http://localHost:5000/getLegislators';
+        axios.get(path)
+            .then((res) => {
+                this.legislatorData = res.data;
+                this.dataLoaded = true;
+                //console.log(this.legislatorData);
+                //console.log(typeof(this.legislatorData));
+                //console.log(this.legislatorData["0"])
+                Object.keys(this.legislatorData).forEach(id => {
+                    this.legislatorNames.push(this.legislatorData[id]['full_name']);
+                    this.legislators[this.legislatorData[id]['full_name']] = this.legislatorData[id]
+                })
+                // let count = 0;
+                // let cont = true;
+                // while (cont && count < 100) {
+                //     try {
+                //         //console.log(this.legislatorData["\"" + count + "\""])
+                //         this.legislators.push(this.legislatorData["\"" + count + "\""]);
+                //         //console.log("\"" + count + "\"")
+                //     }
+                //     catch(error) {
+                //         // Dropped off the end, iteration over
+                //         cont = false;
+                //     }
+                //     count++; 
+                // }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+        console.log("Finished", this.legislatorNames);
+        console.log("Legislator Dict:", this.legislators);
     },
     methods: {
         updateLegHouse() {
