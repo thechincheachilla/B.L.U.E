@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
+from legislator import Legislator as leg
 
 # configuration
 DEBUG = True
@@ -14,9 +15,14 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 # sanity check route
-@app.route('/ping', methods=['GET'])
-def ping_pong():
-    return jsonify('pong!')
+@app.route('/getLegislators', methods=['GET'])
+def get_legislators():
+    return jsonify(leg.parseLegislator("legislators-current.csv"))
+'''
+def get_legislators():
+    raw = pd.read_csv("legislators-current.csv").T.to_dict()
+    return jsonify(raw)
+'''
 
 
 if __name__ == '__main__':
