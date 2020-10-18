@@ -3,10 +3,7 @@
         <b-col>
         <b-input-group>
             <template v-slot:prepend>
-                <b-dropdown :text="legType" variant="success">
-                    <b-dropdown-item @click=updateLegHouse()>Representative</b-dropdown-item>
-                    <b-dropdown-item @click=updateLegSenate()>Senator</b-dropdown-item>
-                </b-dropdown>
+                <b-form-select placeholder="Select:" v-model="selected" :options="searchType"></b-form-select>
             </template>
             <b-form-input></b-form-input>
             <template v-slot:append>
@@ -14,6 +11,8 @@
             </template>
         </b-input-group>
         </b-col>
+        <b-modal v-if="showModal">
+        </b-modal>
     </div>
 </template>
 
@@ -24,11 +23,15 @@ export default {
     name: "LegislatorSearch",
     data() {
         return{
-            legType: "Legislator Type:",
+            selected: null, 
+            searchType: [
+                {value: 'name', text: 'Full Name'},
+            ],
             legislatorData: {},
             dataLoaded: false,
-            legislators: {},
-            legislatorNames: []
+            legislatorNames: [],
+            legislators: {}, 
+            showModal: false
         }
     },
     created() {
@@ -44,33 +47,16 @@ export default {
                     this.legislatorNames.push(this.legislatorData[id]['full_name']);
                     this.legislators[this.legislatorData[id]['full_name']] = this.legislatorData[id]
                 })
-                // let count = 0;
-                // let cont = true;
-                // while (cont && count < 100) {
-                //     try {
-                //         //console.log(this.legislatorData["\"" + count + "\""])
-                //         this.legislators.push(this.legislatorData["\"" + count + "\""]);
-                //         //console.log("\"" + count + "\"")
-                //     }
-                //     catch(error) {
-                //         // Dropped off the end, iteration over
-                //         cont = false;
-                //     }
-                //     count++; 
-                // }
         })
         .catch((error) => {
             console.error(error);
         });
-        console.log("Finished", this.legislatorNames);
-        console.log("Legislator Dict:", this.legislators);
+        //console.log("Finished", this.legislatorNames);
+        //console.log("Legislator Dict:", this.legislators);
     },
     methods: {
-        updateLegHouse() {
-            this.legType = "Representative";
-        },
-        updateLegSenate() {
-            this.legType = "Senator";
+        search() {
+            this.showModal = true; 
         }
     }
 }
