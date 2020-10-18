@@ -17,7 +17,7 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 # sanity check route
 @app.route('/getLegislators', methods=['GET'])
 def get_legislators():
-    return jsonify(leg.parseLegislator("legislators-current.csv"))
+    return leg.parseLegislator("legislators-current.csv")
 '''
 def get_legislators():
     raw = pd.read_csv("legislators-current.csv").T.to_dict()
