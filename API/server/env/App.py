@@ -19,6 +19,10 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 @app.route('/getLegislators', methods=['GET'])
 def get_legislators():
     return leg.parseLegislator("legislators-current.csv")
+
+def get_bills():
+    billMaker = bill()
+    return billMaker.convertToJson()
 '''
 def get_legislators():
     raw = pd.read_csv("legislators-current.csv").T.to_dict()
