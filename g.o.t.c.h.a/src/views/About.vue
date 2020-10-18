@@ -34,7 +34,7 @@
       </b-card>
 
 
-      <b-card class = "img" img-src="../assets/rei.jpg" img-alt="Card image" img-left>
+      <b-card class = "img" img-src="../assets/reiden.jpg" img-alt="Card image" img-left>
           <b-card-text>
             Reiden.
           </b-card-text>
@@ -47,7 +47,7 @@
           </b-card-text>
       </b-card>
 
-      <b-card class = "img" img-src="../assets/jar.jpg" img-alt="Card image" img-left>
+      <b-card class = "img" img-src="../assets/jared.jpg" img-alt="Card image" img-left>
         <b-card-text>
           Jared.
         </b-card-text>
