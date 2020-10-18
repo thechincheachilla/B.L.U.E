@@ -2,7 +2,7 @@
   <div id="about">
     <h1 class="ml-3" style="font-weight:bold; text-align:left">Project g.o.t.c.h.a:</h1>
     <h2 class="ml-3 mb-3" style="color:#42b983; text-align:left">Government Observer: Transparency, Credibility and Honesty Application</h2>
-    <b-row>
+    <b-row class="mb-5">
       <b-col style="border-right:1px solid black">
         <p class="ml-3" style="text-align:left;">Despite electing our politicians, the majority of citizens do not know how their own representatives vote, 
           nor the types of bills they even vote on. Despite the progression of technology, governmental legislation remains on outdated, non-intuitive databases 
@@ -18,12 +18,12 @@
         <h2 class="ml-2" style="text-align:left; color:#42b983"> ~ Franklin Delano Roosevelt</h2>
       </b-col>
     </b-row>
-    <h1 class="mt-4, mr-3" style="font-weight:bold; text-align:right">Meet Team B.L.U.E</h1>
+    <h1 class="mt-5, mr-3" style="font-weight:bold; text-align:center">Meet Team B.L.U.E</h1>
     
     <b-row class="ml-3">
 
-      <b-card-group deck>
-        <b-row>
+      <b-card-group deck class="mb-4, mx-auto">
+        <b-row class="mt-4">
           <b-card no-body class="overflow-hidden" style="max-width: 540px;">
             <b-row no-gutters>
               <b-col md="6">
@@ -59,8 +59,8 @@
         </b-row>
       </b-card-group>
 
-      <b-card-group deck>
-        <b-row>
+      <b-card-group deck class="mb-4, mx-auto">
+        <b-row class="mt-4">
           <b-card no-body class="overflow-hidden" style="max-width: 540px;">
             <b-row no-gutters>
               <b-col md="6">
@@ -97,8 +97,8 @@
         </b-row>
       </b-card-group>
 
-      <b-card-group deck>
-        <b-row>
+      <b-card-group deck class="mx-auto">
+        <b-row class="mt-4">
           <b-card no-body class="overflow-hidden" style="max-width: 540px;">
             <b-row no-gutters>
               <b-col md="6">
