@@ -13,9 +13,9 @@ def loadXML(url, filename, final_filename, singleOr100):
     with open(filename, 'wb') as file: 
         file.write(response.content) 
     if singleOr100 == '100':
-        parseXML(filename, final_filename)
+        return parseXML(filename, final_filename)
     elif singleOr100 == 'single':
-        parseXMLSponsor(filename)
+        return parseXMLSponsor(filename)
 
 
 
@@ -55,10 +55,7 @@ def parseXMLSponsor(xmlfile):
     for item in root.findall('./bill'):
 
         info = {'summaries' : [], 'sponsors' : [], 'cosponsors' : [], 'titles' : []}
-
-
-
-    
+ 
         for child in item:
             if child.tag == 'summaries':
                 for item in root.findall('./bill/summaries/billSummaries/item/text'):
@@ -102,10 +99,10 @@ def readCSV(csvfile):
     df['guid'] = df.apply(lambda x : x['guid'][11:], axis=1)
     return df['guid'].tolist()
 
+
 def extractSponsors(csv):
     # csv is list of guid
     bills = {}
-    firstDigit = 0
     for guid in csv:
         if "is" in guid or "ih" in guid or "es" in guid or "eh" in guid or "rh" in guid:
             guid = guid[:-3]
