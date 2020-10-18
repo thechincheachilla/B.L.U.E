@@ -4,7 +4,6 @@ import xml.etree.ElementTree as ET
 import pandas as pd
   
 def loadRSS(): 
-  
     # url of rss feed 
     url = 'https://www.govinfo.gov/rss/bills.xml'
   
@@ -14,6 +13,7 @@ def loadRSS():
     # saving the xml file 
     with open('newest_bills.xml', 'wb') as file: 
         file.write(response.content) 
+
 
 def parseXML(xmlfile): 
   
@@ -40,6 +40,7 @@ def parseXML(xmlfile):
     # return bill items list 
     return bill_items 
 
+
 def savetoCSV(bill_items, filename): 
   
     # specifying the fields for csv file 
@@ -57,18 +58,24 @@ def savetoCSV(bill_items, filename):
         # writing data rows 
         writer.writerows(bill_items) 
 
+
 def readCSV(csvfile):
     df = pd.read_csv(csvfile)
-    return df['guid'][0:5]
+    df['link'] = df.apply(lambda x : x['link'][2:-1], axis=1)
+    return df['link'].tolist()
+
 
 def main(): 
-    # load rss from web to update existing xml file 
+	# load rss from web to update existing xml file 
     loadRSS() 
-  
     # parse xml file 
     bill_items = parseXML('newest_bills.xml') 
-
     # store news items in a csv file 
     savetoCSV(bill_items, 'bill_items.csv')
-main()
+    print(readCSV("bill_items.csv"))
+ 
+
+
+if __name__ == '__main__':
+    main()
 
