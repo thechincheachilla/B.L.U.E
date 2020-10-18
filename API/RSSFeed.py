@@ -25,8 +25,6 @@ def mapToBill(bills):
 
 
 
-
-
 def loadRSS(): 
     # url of rss feed 
     url = 'https://www.govinfo.gov/rss/bills.xml'
