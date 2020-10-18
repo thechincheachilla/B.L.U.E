@@ -11,16 +11,16 @@ mapped to what they sponsored
 def mapToBill(bills):
     legislators = {}
     
+    # checks all bills and their respective sponsors
     for bill, sponsors in bills.items():
-    '''
-    check sponsors for each bill
-    '''
+        
+        # check sponsors for each bill
         for sponsor in sponsors:
-            if sponsor is not in legislators:
-                legislators[sponsor] = [bill]
-            else:
+            if sponsor in legislators:
                 legislators[sponsor].append(bill)
-
+            else:
+                legislators[sponsor] = [bill]
+                
     return legislators
 
 
