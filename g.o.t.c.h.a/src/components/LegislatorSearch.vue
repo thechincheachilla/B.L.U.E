@@ -29,17 +29,17 @@ export default {
         }
     },
     created: {
-        // getLegislators() {
-        //     const path = 'http://localHost:5000/getLegislators';
-        //     axios.get(path)
-        //         .then((res) => {
-        //             this.legislatorData = res.data;
-        //             console.log(this.legislatorData);
-        //     })
-        //     .catch((error) => {
-        //         console.error(error);
-        //     });
-        // },
+        getLegislators() {
+            const path = 'http://localHost:5000/getLegislators';
+            axios.get(path)
+                .then((res) => {
+                    this.legislatorData = res.data;
+                    console.log(this.legislatorData);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        },
     },
     methods: {
         updateLegHouse() {

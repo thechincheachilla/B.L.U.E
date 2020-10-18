@@ -7,6 +7,7 @@
 3. Run vue --version and ensure vue is installednpm update -g @vue/cli
     - If this step fails, re-run step 2 until Vue is successfully installed
 4. Run npm install bootstrap-vue
-5. CD to the server folder in the API folder, run:
+5. Run npm install axios@0.18.0 --save 
+6. CD to the server folder in the API folder, run:
 - source env/bin/activate 
 - cd into the env folder, run python app.py (starts the api)
