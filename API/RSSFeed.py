@@ -2,9 +2,30 @@ import csv
 import requests
 import xml.etree.ElementTree as ET
 import pandas as pd
-  
+
+'''
+mapToBill takes in a dictionary (with bills as keys and sponsors as values)
+and reverses the key mapping pair so that we can get a dictionary of sponsors
+mapped to what they sponsored
+'''
+def mapToBill(bills):
+    legislators = {}
+    
+    # checks all bills and their respective sponsors
+    for bill, sponsors in bills.items():
+        
+        # check sponsors for each bill
+        for sponsor in sponsors:
+            if sponsor in legislators:
+                legislators[sponsor].append(bill)
+            else:
+                legislators[sponsor] = [bill]
+                
+    return legislators
+
+
+
 def loadRSS(): 
-  
     # url of rss feed 
     url = 'https://www.govinfo.gov/rss/bills.xml'
   
@@ -14,6 +35,7 @@ def loadRSS():
     # saving the xml file 
     with open('newest_bills.xml', 'wb') as file: 
         file.write(response.content) 
+
 
 def parseXML(xmlfile): 
   
@@ -40,6 +62,7 @@ def parseXML(xmlfile):
     # return bill items list 
     return bill_items 
 
+
 def savetoCSV(bill_items, filename): 
   
     # specifying the fields for csv file 
@@ -57,17 +80,24 @@ def savetoCSV(bill_items, filename):
         # writing data rows 
         writer.writerows(bill_items) 
 
+
 def readCSV(csvfile):
-    bills = pd.read_csv(csvfile)
+    df = pd.read_csv(csvfile)
+    df['link'] = df.apply(lambda x : x['link'][2:-1], axis=1)
+    return df['link'].tolist()
+
 
 def main(): 
-    # load rss from web to update existing xml file 
+	# load rss from web to update existing xml file 
     loadRSS() 
-  
     # parse xml file 
     bill_items = parseXML('newest_bills.xml') 
-
     # store news items in a csv file 
     savetoCSV(bill_items, 'bill_items.csv')
-main()
+    print(readCSV("bill_items.csv"))
+ 
+
+
+if __name__ == '__main__':
+    main()
 
