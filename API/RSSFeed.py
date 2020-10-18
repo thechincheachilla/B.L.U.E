@@ -92,10 +92,12 @@ def readCSV(csvfile):
     df['guid'] = df.apply(lambda x : x['guid'][11:-3], axis=1)
     return df['guid'].tolist()
 
+
 def extractSponsors(csv):
+    # csv is list of guid
     bills = {}
     for guid in csv:
-        guid = csv[0]
+        # guid = csv[0]
         url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/hr/BILLSTATUS-116' + guid + '.xml'
         bills[guid] = loadXML(url, "bill_sponsors.xml", "sponsor_names.csv", "single")
     return bills
@@ -129,10 +131,10 @@ def main():
     # bill_items = parseXML('newest_bills.xml') 
     # store news items in a csv file 
     # savetoCSV(bill_items, 'bill_items.csv')
-    print(readCSV("bill_items.csv"))
+    # print(readCSV("bill_items.csv"))
     datas = extractSponsors(readCSV("bill_items.csv"))
     for data in datas:
-        print(data)
+        print("data: " + data)
  
 
 
