@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="showHome" id="home" class="home">
+    <div id="home">
       <h1 class="mb-4" style="font-weight:bold; font-size:50px">Project</h1>
       <img alt="GOTCHA_Logo" src="../assets/GOTCHA_Logo.png" style="width:35%; height:35%" />
       <h1 class="mt-4 mb-4" style="font-weight:bold;">No time to read the latest bills? We gotcha!</h1>
@@ -15,7 +15,7 @@
                 What have our legislators been up to? How does their voting record look? How can we contact them?
                 Use this search to find out!
               </b-card-text>
-              <b-button variant="info" @click="lookupPpl()" to="/legislators">Search</b-button>
+              <b-button variant="info" to="/legislators">Search</b-button>
             </b-card>
             <b-card 
               header="Lookup Legislation" 
@@ -25,7 +25,7 @@
                 Want to find out what Congress has been up to? What bills are currently on the floor?
                 Click here to find out! 
               </b-card-text>
-              <b-button variant="info" @click="lookupBills()" to="/legislation">Search</b-button>
+              <b-button variant="info" to="/legislation">Search</b-button>
             </b-card>
           </b-card-group>
         </div>
@@ -40,22 +40,9 @@ export default {
   name: "Home",
   data() {
     return {
-      showHome: true,
-      showLegislators: false,
-      showLegislation: false,
     }
   },
   methods: {
-    lookupBills() {
-      this.showHome = false;
-      this.showLegislation = true;
-      this.showLegislators = false;
-    },
-    lookupPpl() {
-      this.showHome = false; 
-      this.showLegislation = false;
-      this.showLegislators = true;
-    }
   }
 }
 </script>

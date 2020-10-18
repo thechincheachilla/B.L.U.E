@@ -5,7 +5,7 @@ import pandas as pd
 
 
 
-def loadRSS(url, filename, final_filename, isItem): 
+def loadRS(url, filename, final_filename, isItem) 
     # url of rss feed 
     response = requests.get(url) 
   
