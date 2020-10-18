@@ -28,12 +28,14 @@
               <b-button variant="info" to="/legislation">Search</b-button>
             </b-card>
           
-            <b-card img-src="../assets/'0 huy.jpg'">
-
+            <b-card img-src="../assets/huy.jpg">
+              <b-card-text>
+                This is the boi Huy
+              </b-card-text>
             </b-card>
 
 
-            <b-card>
+            <b-card img-src="../assets/rei.jpg">
 
             </b-card>
 
