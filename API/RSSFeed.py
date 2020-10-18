@@ -5,9 +5,25 @@ import pandas as pd
 
 '''
 mapToBill takes in a dictionary (with bills as keys and sponsors as values)
-and reverses the key mapping pair so that we can get a dictionary of 
+and reverses the key mapping pair so that we can get a dictionary of sponsors
+mapped to what they sponsored
 '''
-def mapToBill()
+def mapToBill(bills):
+    legislators = {}
+    
+    for bill, sponsors in bills.items():
+    '''
+    check sponsors for each bill
+    '''
+        for sponsor in sponsors:
+            if sponsor is not in legislators:
+                legislators[sponsor] = [bill]
+            else:
+                legislators[sponsor].append(bill)
+
+    return legislators
+
+
 
 
 
