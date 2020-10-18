@@ -58,7 +58,8 @@ def savetoCSV(bill_items, filename):
         writer.writerows(bill_items) 
 
 def readCSV(csvfile):
-    bills = pd.read_csv(csvfile)
+    df = pd.read_csv(csvfile)
+    return df['guid'][0:5]
 
 def main(): 
     # load rss from web to update existing xml file 
