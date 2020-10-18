@@ -6,6 +6,12 @@ import json
 
 
 class RSSFeedMain:
+
+    def __init__(self):
+        self.loadXML('https://www.govinfo.gov/rss/bills.xml', "newest_bills.xml", "bill_items.csv", "100") 
+        self.billToLegis = self.extractSponsors(self.readCSV("bill_items.csv"))
+        self.legisToBill = self.mapToBill(self.billToLegis)
+
     
     def loadXML(self, url, filename, final_filename, singleOr100):
         # url of rss feed 
@@ -167,6 +173,7 @@ class RSSFeedMain:
 
 def main(): 
     feed = RSSFeedMain()
+    '''
     # load rss from web to update existing xml file 
     feed.loadXML('https://www.govinfo.gov/rss/bills.xml', "newest_bills.xml", "bill_items.csv", "100") 
     
@@ -177,6 +184,10 @@ def main():
         print("value: ", datas[data])
         #.     convertToJson(data, extendData)
     print(feed.mapToBill(datas))
+    '''
+    print("billToLegis: ", feed.billToLegis)
+    print()
+    print("legisToBill: ", feed.legisToBill)
 
 
 if __name__ == '__main__':
