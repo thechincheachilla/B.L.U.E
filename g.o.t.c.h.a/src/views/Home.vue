@@ -27,26 +27,6 @@
               </b-card-text>
               <b-button variant="info" to="/legislation">Search</b-button>
             </b-card>
-          
-            <b-card img-src="../assets/'0 huy.jpg'">
-
-            </b-card>
-
-
-            <b-card>
-
-            </b-card>
-
-
-            <b-card>
-
-            </b-card>
-
-
-            <b-card>
-
-            </b-card>
-
           </b-card-group>
         </div>
       </b-container>
