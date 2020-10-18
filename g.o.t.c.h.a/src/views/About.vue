@@ -110,8 +110,20 @@
   color: #2c3e50;
 }
 
-.img{
-  width:50%;
+.profiles {
+  display: flex;
+  flex-direction:column;
+  width: 50%;
+  height: 10%;
+}
+
+.profiles .img {
+  flex: 2;
   border: 2px solid grey;
+  height: 10%;
+}
+
+.profiles .text{
+  flex: 6;
 }
 </style>
