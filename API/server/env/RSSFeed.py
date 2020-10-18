@@ -2,6 +2,7 @@ import csv
 import requests
 import xml.etree.ElementTree as ET
 import pandas as pd
+import json
 
 
 
@@ -143,6 +144,13 @@ def mapToBill(bills):
 
     return legislators
 
+def convertToJson(data, extendData):
+    billsDict = {}
+    billsDict[data] = extendData
+    with open('bills.txt', 'w') as outfile:
+        json.dump(data, outfile)
+
+
 
 def main(): 
 	# load rss from web to update existing xml file 
@@ -154,11 +162,13 @@ def main():
     print(readCSV("bill_items.csv"))
     datas = extractSponsors(readCSV("bill_items.csv"))
     for data in datas:
-        print("data: " + data)
-        print("value: ", datas[data])
+        extendData = datas[data]
+        #print("data: " + data)
+        #print("value: ", datas[data])''
         #print("sponsors: ", datas[data][0])
         #print("sponsors: ", datas[data][1])
         #print("sponsors: ", datas[data][2])
+        convertToJson(data, extendData)
  
 
 
