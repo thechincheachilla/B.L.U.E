@@ -21,81 +21,90 @@
     <h1 class="mt-4, mr-3" style="font-weight:bold; text-align:right">Meet Team B.L.U.E</h1>
     <b-row class="ml-3">
       <b-card-group>
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-          <b-row no-gutters>
-            <b-col md="6">
-              <img src="../assets/reiden.jpg" class="card-img card-img-top img-fluid" />
-            </b-col>
-            <b-col md="6">
-              <b-card-body title="Horizontal Card">
-                <b-card-text>
-                  This is a wider card with supporting text as a natural lead-in to additional content.
-                  This content is a little bit longer.
-                </b-card-text>
-              </b-card-body>
-            </b-col>
-          </b-row>
-        </b-card>
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-          <b-row no-gutters>
-            <b-col md="6">
-              <img src="../assets/jennifer.jpg" class="card-img card-img-top img-fluid" />
-            </b-col>
-            <b-col md="6">
-              <b-card-body title="Horizontal Card">
-                <b-card-text>
-                  This is a wider card with supporting text as a natural lead-in to additional content.
-                  This content is a little bit longer.
-                </b-card-text>
-              </b-card-body>
-            </b-col>
-          </b-row>
-        </b-card>
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-          <b-row no-gutters>
-            <b-col md="6">
-              <img src="../assets/anson.jpg" class="card-img card-img-top img-fluid" />
-            </b-col>
-            <b-col md="6">
-              <b-card-body title="Horizontal Card">
-                <b-card-text>
-                  This is a wider card with supporting text as a natural lead-in to additional content.
-                  This content is a little bit longer.
-                </b-card-text>
-              </b-card-body>
-            </b-col>
-          </b-row>
-        </b-card>
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-          <b-row no-gutters>
-            <b-col md="6">
-              <img src="../assets/huy.jpg" class="card-img card-img-top img-fluid" />
-            </b-col>
-            <b-col md="6">
-              <b-card-body title="Horizontal Card">
-                <b-card-text>
-                  This is a wider card with supporting text as a natural lead-in to additional content.
-                  This content is a little bit longer.
-                </b-card-text>
-              </b-card-body>
-            </b-col>
-          </b-row>
-        </b-card>
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-          <b-row no-gutters>
-            <b-col md="6">
-              <img src="../assets/jared.jpg" class="card-img card-img-top img-fluid" />
-            </b-col>
-            <b-col md="6">
-              <b-card-body title="Horizontal Card">
-                <b-card-text>
-                  This is a wider card with supporting text as a natural lead-in to additional content.
-                  This content is a little bit longer.
-                </b-card-text>
-              </b-card-body>
-            </b-col>
-          </b-row>
-        </b-card>
+        <b-row>
+          <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+            <b-row no-gutters>
+              <b-col md="6">
+                <img src="../assets/reiden.jpg" class="card-img card-img-top img-fluid" />
+              </b-col>
+              <b-col md="6">
+                <b-card-body title="Reiden Chea">
+                  <b-card-text>
+                    This is a wider card with supporting text as a natural lead-in to additional content.
+                    This content is a little bit longer.
+                  </b-card-text>
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+          <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+            <b-row no-gutters>
+              <b-col md="6">
+                <img src="../assets/jennifer.jpg" class="card-img card-img-top img-fluid" />
+              </b-col>
+              <b-col md="6">
+                <b-card-body title="Jennifer Fernandez">
+                  <b-card-text>
+                    This is a wider card with supporting text as a natural lead-in to additional content.
+                    This content is a little bit longer.
+                  </b-card-text>
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-row>
+
+        <b-row>
+          <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+            <b-row no-gutters>
+              <b-col md="6">
+                <img src="../assets/anson.jpg" class="card-img card-img-top img-fluid" />
+              </b-col>
+              <b-col md="6">
+                <b-card-body title="Anson Huang">
+                  <b-card-text>
+                    This is a wider card with supporting text as a natural lead-in to additional content.
+                    This content is a little bit longer.
+                  </b-card-text>
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+          <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+            <b-row no-gutters>
+              <b-col md="6">
+                <img src="../assets/huy.jpg" class="card-img card-img-top img-fluid" />
+              </b-col>
+              <b-col md="6">
+                <b-card-body title="Huy Huynh">
+                  <b-card-text>
+                    This is a wider card with supporting text as a natural lead-in to additional content.
+                    This content is a little bit longer.
+                  </b-card-text>
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-row>
+
+        <b-row>
+          <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+            <b-row no-gutters>
+              <b-col md="6">
+                <img src="../assets/jared.jpg" class="card-img card-img-top img-fluid" />
+              </b-col>
+              <b-col md="6">
+                <b-card-body title="Jared Tran">
+                  <b-card-text>
+                    This is a wider card with supporting text as a natural lead-in to additional content.
+                    This content is a little bit longer.
+                  </b-card-text>
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-row>
+
       </b-card-group>
     </b-row>
   </div>
