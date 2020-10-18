@@ -20,20 +20,19 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 def get_legislators():
     return leg.parseLegislator("legislators-current.csv")
 
-<<<<<<< Updated upstream
 @app.route('/getBills', methods=['GET'])
-=======
 # Map with key of legislators and their sponsored bills
->>>>>>> Stashed changes
 def get_bills():
     billMaker = rsfm()
     return billMaker.convertToJson(billMaker.legisToBill)
 
+@app.route('/getBillInfos', methods=['GET'])
 # Map with key of bill ids connected to list of in order short title, long title, summary
 def get_billInfo():
     billMaker = rsfm()
     return billMaker.convertToJson(billMaker.idToSummaries)
 
+@app.route('/getBillSponsors', methods=['GET'])
 # Map with key of bill ids connected to their sponsers
 def get_sponserOfBill():
     billMaker = rsfm()
