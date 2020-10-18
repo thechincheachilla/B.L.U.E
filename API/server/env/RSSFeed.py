@@ -114,10 +114,11 @@ class RSSFeedMain:
         # csv is list of guid
         bills = {}
         for guid in csv:
-            if "is" in guid or "ih" in guid or "es" in guid or "eh" in guid or "rh" in guid:
-                guid = guid[:-3]
-            elif "rfs" in guid:
+            if "rfs" in guid:
                 guid = guid[:-4]
+            else:
+                guid = guid[:-3]
+
 
             for i in range(len(guid)):
                 if guid[i].isdigit():
