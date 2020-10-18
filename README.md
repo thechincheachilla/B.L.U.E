@@ -12,3 +12,4 @@
 7. CD to the server folder in the API folder, run:
 - source env/bin/activate 
 - cd into the env folder, run python app.py (starts the api)
+8. Run pip3 install requests
