@@ -10,6 +10,11 @@ class RSSFeedMain:
     def __init__(self):
         self.loadXML('https://www.govinfo.gov/rss/bills.xml', "newest_bills.xml", "bill_items.csv", "100") 
         self.billToLegis = self.extractSponsors(self.readCSV("bill_items.csv"))
+
+        # bill id -> summary/title
+        self.idToSummaries = self.idToSummary(self.billToLegis)
+        # bill id -> sponsor
+        self.idToSponsor = self.idToSpons(self.billToLegis)
         self.legisToBill = self.mapToBill(self.billToLegis)
 
 
@@ -106,10 +111,11 @@ class RSSFeedMain:
         # csv is list of guid
         bills = {}
         for guid in csv:
-            if "is" in guid or "ih" in guid or "es" in guid or "eh" in guid or "rh" in guid:
-                guid = guid[:-3]
-            elif "rfs" in guid:
+            if "rfs" in guid:
                 guid = guid[:-4]
+            else:
+                guid = guid[:-3]
+
 
             for i in range(len(guid)):
                 if guid[i].isdigit():
@@ -155,6 +161,22 @@ class RSSFeedMain:
         return legislators
 
 
+    def idToSummary(self, bills):
+        idToSum = {}
+        for bill,lists in bills.items():
+            combinedList = [lists[0]['titles'][0], lists[0]['titles'][1]]
+            combinedList = combinedList + lists[0]['summaries']
+            idToSum[bill] = combinedList
+        return idToSum
+
+
+    def idToSpons(self, bills):
+        idToSpon = {}
+        for bill, lists in bills.items():
+            idToSpon[bill] = lists[0]['sponsors'] + lists[0]['cosponsors']
+        return idToSpon
+
+
     def convertToJson(self):
         data = self.legisToBill
         jsonObject = json.dumps(data, indent = 4)
@@ -179,9 +201,13 @@ def main():
         #.     convertToJson(data, extendData)
     print(feed.mapToBill(datas))
     '''
-    #print("billToLegis: ", feed.billToLegis)
-    #print()
-    #print("legisToBill: ", feed.legisToBill)
+    print("billToLegis: ", feed.billToLegis)
+    print()
+    print("legisToBill: ", feed.legisToBill)
+    print()
+    print("idtosum: ", feed.idToSummaries)
+    print()
+    print("idtospon: ", feed.idToSponsor)
 
 
 
