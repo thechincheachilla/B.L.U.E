@@ -1,14 +1,15 @@
 import pandas as pd
 import csv
 
+class Legislator:
 
-def parseLegislator(csvfile):
-    raw = pd.read_csv(csvfile)
-    print(raw)
+    def parseLegislator(csvfile):
+        raw = pd.read_csv(csvfile)
+        print(raw)
 
-def main():
-    parseLegislator("legislators-current.csv")
- 
+    def main():
+        parseLegislator("legislators-current.csv")
+    
 
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        main()
