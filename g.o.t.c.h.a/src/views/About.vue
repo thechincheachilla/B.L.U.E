@@ -21,33 +21,33 @@
     <h1 class="mt-4, mr-3" style="font-weight:bold; text-align:right">Meet Team B.L.U.E</h1>
   
     <b-card-group>
-      <b-card img-src="../assets/jen.jpg" img-alt="Card image" img-left>
+      <b-card class = "img" img-src="../assets/jen.jpg" img-alt="Card image" img-left>
           <b-card-text>
             Jennifer.
           </b-card-text>
       </b-card>
 
-      <b-card img-src="../assets/huy.jpg" img-alt="Card image" img-left>
+      <b-card class = "img" img-src="../assets/huy.jpg" img-alt="Card image" img-right>
           <b-card-text>
             Hoy.
           </b-card-text>
       </b-card>
 
 
-      <b-card img-src="../assets/rei.jpg" img-alt="Card image" img-left>
+      <b-card class = "img" img-src="../assets/rei.jpg" img-alt="Card image" img-left>
           <b-card-text>
             Reiden.
           </b-card-text>
       </b-card>
 
 
-      <b-card img-src="../assets/anson.jpg" img-alt="Card image" img-left>
+      <b-card class = "img" img-src="../assets/anson.jpg" img-alt="Card image" img-right>
           <b-card-text>
             Anson.
           </b-card-text>
       </b-card>
 
-      <b-card img-src="../assets/jar.jpg" img-alt="Card image" img-left>
+      <b-card class = "img" img-src="../assets/jar.jpg" img-alt="Card image" img-left>
         <b-card-text>
           Jared.
         </b-card-text>
@@ -63,5 +63,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.img{
+  width:50%;
+  border: 2px solid grey;
 }
 </style>
