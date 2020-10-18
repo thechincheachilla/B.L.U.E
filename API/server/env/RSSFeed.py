@@ -164,8 +164,25 @@ class RSSFeedMain:
     def idToSummary(self, bills):
         idToSum = {}
         for bill,lists in bills.items():
+            newString = None
+            if len(lists[0]['summaries']) > 0:
+                x = lists[0]['summaries'][0]
+                newString = ""
+                carot = False
+                for i in range(len(x)):
+                    if(x[i] == '<'):
+                        carot = True
+                    elif(x[i] == '>' and carot):
+                        carot = False
+                    elif not carot:
+                        newString += x[i]
+
+
             combinedList = [lists[0]['titles'][0], lists[0]['titles'][1]]
-            combinedList = combinedList + lists[0]['summaries']
+            if newString is not None:
+                combinedList.append(newString)
+            else:
+                combinedList = combinedList + lists[0]['summaries']
             idToSum[bill] = combinedList
         return idToSum
 
@@ -177,13 +194,14 @@ class RSSFeedMain:
         return idToSpon
 
 
-    def convertToJson(self):
-        data = self.legisToBill
+    def convertToJson(self, data):
+    
         jsonObject = json.dumps(data, indent = 4)
         return jsonObject
-        #print(jsonObject)
-        #with open('bills.txt', 'w') as outfile:
-            #json.dump(data, outfile)
+        
+      
+    
+
 
 
 
@@ -201,13 +219,14 @@ def main():
         #.     convertToJson(data, extendData)
     print(feed.mapToBill(datas))
     '''
-    print("billToLegis: ", feed.billToLegis)
-    print()
-    print("legisToBill: ", feed.legisToBill)
-    print()
-    print("idtosum: ", feed.idToSummaries)
-    print()
-    print("idtospon: ", feed.idToSponsor)
+    #print("billToLegis: ", feed.billToLegis)
+    #print()
+    #print("legisToBill: ", feed.legisToBill)
+    #print()
+    #print("idtosum: ", feed.idToSummaries)
+    #print()
+    #print("idtospon: ", feed.idToSponsor)
+    print(feed.convertToJson(feed.idToSummaries))
 
 
 

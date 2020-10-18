@@ -19,40 +19,85 @@
       </b-col>
     </b-row>
     <h1 class="mt-4, mr-3" style="font-weight:bold; text-align:right">Meet Team B.L.U.E</h1>
-  
-    <b-card-group>
-      <b-card class = "img" img-src="../assets/jen.jpg" img-alt="Card image" img-left>
-          <b-card-text>
-            Jennifer.
-          </b-card-text>
-      </b-card>
-
-      <b-card class = "img" img-src="../assets/huy.jpg" img-alt="Card image" img-right>
-          <b-card-text>
-            Hoy.
-          </b-card-text>
-      </b-card>
-
-
-      <b-card class = "img" img-src="../assets/reiden.jpg" img-alt="Card image" img-left>
-          <b-card-text>
-            Reiden.
-          </b-card-text>
-      </b-card>
-
-
-      <b-card class = "img" img-src="../assets/anson.jpg" img-alt="Card image" img-right>
-          <b-card-text>
-            Anson.
-          </b-card-text>
-      </b-card>
-
-      <b-card class = "img" img-src="../assets/jared.jpg" img-alt="Card image" img-left>
-        <b-card-text>
-          Jared.
-        </b-card-text>
-      </b-card>
-    </b-card-group>
+    <b-row class="ml-3">
+      <b-card-group>
+        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+          <b-row no-gutters>
+            <b-col md="6">
+              <img src="../assets/reiden.jpg" class="card-img card-img-top img-fluid" />
+            </b-col>
+            <b-col md="6">
+              <b-card-body title="Horizontal Card">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+          <b-row no-gutters>
+            <b-col md="6">
+              <img src="../assets/jennifer.jpg" class="card-img card-img-top img-fluid" />
+            </b-col>
+            <b-col md="6">
+              <b-card-body title="Horizontal Card">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+          <b-row no-gutters>
+            <b-col md="6">
+              <img src="../assets/anson.jpg" class="card-img card-img-top img-fluid" />
+            </b-col>
+            <b-col md="6">
+              <b-card-body title="Horizontal Card">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+          <b-row no-gutters>
+            <b-col md="6">
+              <img src="../assets/huy.jpg" class="card-img card-img-top img-fluid" />
+            </b-col>
+            <b-col md="6">
+              <b-card-body title="Horizontal Card">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+          <b-row no-gutters>
+            <b-col md="6">
+              <img src="../assets/jared.jpg" class="card-img card-img-top img-fluid" />
+            </b-col>
+            <b-col md="6">
+              <b-card-body title="Horizontal Card">
+                <b-card-text>
+                  This is a wider card with supporting text as a natural lead-in to additional content.
+                  This content is a little bit longer.
+                </b-card-text>
+              </b-card-body>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-card-group>
+    </b-row>
   </div>
 </template>
 
@@ -65,8 +110,20 @@
   color: #2c3e50;
 }
 
-.img{
-  width:50%;
+.profiles {
+  display: flex;
+  flex-direction:column;
+  width: 50%;
+  height: 10%;
+}
+
+.profiles .img {
+  flex: 2;
   border: 2px solid grey;
+  height: 10%;
+}
+
+.profiles .text{
+  flex: 6;
 }
 </style>
