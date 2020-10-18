@@ -49,22 +49,32 @@ def parseXMLSponsor(xmlfile):
 
     bill_info = []
 
-    for item in root.findall('billStatus/bill'):
-        
-        info = {'summaries' : [], 'sponsors' : [], 'cosponsors' : []}
 
+
+    
+    for item in root.findall('./bill'):
+
+        info = {'summaries' : [], 'sponsors' : [], 'cosponsors' : [], 'titles' : []}
+
+
+
+    
         for child in item:
-            print(child.tag)
             if child.tag == 'summaries':
-                for item in root.findall('billStatus/bill/summaries/billSummaries/item'):
-                    if child.tag == 'text':
-                        info[child.tag].append(child.text.encode('utf8'))
-            elif child.tag == 'sponsors' or child.tag == 'cosponsors':
-                for item in root.findall('billStatus/bill/sponsors/item'):
-                    if child.tag == 'fullName':
-                        info[child.tag].append(child.text.encode('utf8'))
+                for item in root.findall('./bill/summaries/billSummaries/item/text'):
+                    info['summaries'].append(item.text)
+            elif child.tag == 'sponsors':
+                for item in root.findall('./bill/sponsors/item/fullName'):
+                    info['sponsors'].append(item.text)
+            elif child.tag == 'cosponsors':
+                for item in root.findall('./bill/cosponsors/item/fullName'):
+                    info['cosponsors'].append(item.text)     
+            elif child.tag == 'titles':
+                for item in root.findall('./bill/titles/item/title'):
+                    info['titles'].append(item.text)
 
         bill_info.append(info)
+    
     # list of dictionaries where the keys are the tags and values are lists
     return bill_info
 
@@ -89,16 +99,30 @@ def savetoCSV(bill_items, filename):
 
 def readCSV(csvfile):
     df = pd.read_csv(csvfile)
-    df['guid'] = df.apply(lambda x : x['guid'][11:-3], axis=1)
+    df['guid'] = df.apply(lambda x : x['guid'][11:], axis=1)
     return df['guid'].tolist()
 
 
 def extractSponsors(csv):
     # csv is list of guid
     bills = {}
+    firstDigit = 0
     for guid in csv:
-        # guid = csv[0]
-        url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/hr/BILLSTATUS-116' + guid + '.xml'
+        if "is" in guid or "ih" in guid or "es" in guid or "eh" in guid or "rh" in guid:
+            guid = guid[:-3]
+        elif "rfs" in guid:
+            guid = guid[:-4]
+
+        for i in range(len(guid)):
+            #print("guid: " + guid + ", i: " + str(i))
+            if guid[i].isdigit():
+                pre = guid[0:i]
+                break
+
+        #print("pre: " + str(pre) + ", post: " + str(guid))
+
+        url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/' + pre + '/BILLSTATUS-116' + guid + '.xml'
+        #print(url)
         bills[guid] = loadXML(url, "bill_sponsors.xml", "sponsor_names.csv", "single")
     return bills
 
@@ -131,10 +155,14 @@ def main():
     # bill_items = parseXML('newest_bills.xml') 
     # store news items in a csv file 
     # savetoCSV(bill_items, 'bill_items.csv')
-    # print(readCSV("bill_items.csv"))
+    print(readCSV("bill_items.csv"))
     datas = extractSponsors(readCSV("bill_items.csv"))
     for data in datas:
         print("data: " + data)
+        print("value: ", datas[data])
+        #print("sponsors: ", datas[data][0])
+        #print("sponsors: ", datas[data][1])
+        #print("sponsors: ", datas[data][2])
  
 
 
