@@ -155,8 +155,8 @@ class RSSFeedMain:
                         legislators[newName] = [bill]
                 else:
                     legislators[newName].append(bill)
-                print("bill: " + bill + ", newname: " + newName + ", legislators: ", legislators)
-                print()
+                #print("bill: " + bill + ", newname: " + newName + ", legislators: ", legislators)
+                #print()
 
         return legislators
 

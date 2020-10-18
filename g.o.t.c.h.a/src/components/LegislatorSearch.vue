@@ -10,7 +10,9 @@
                 <b-button v-b-modal.info @click=search() variant="info">Search</b-button>
             </template>
         </b-input-group>
-        <b-spinner v-else>Loading...</b-spinner>
+        <div v-else class="text-center">
+            <b-spinner variant="primary" label="Text Centered"></b-spinner>
+        </div>
         </b-col>
         <b-modal id="info" :title="currentName">
             <div>
@@ -50,7 +52,13 @@
                         </b-row>
                     </b-tab>
                     <b-tab title="Sponsorships">
-                        
+                        <div v-if="modalDataLoaded">
+                            <h4 style="text-align:center; font-weight:bold; color:#42b983">Sponsorships:</h4>
+                            <h6 style="text-align:center" v-for="bill in currentLegislator['bills']" :key="bill">{{ bill }}</h6>
+                        </div>
+                        <div v-else class="text-center">
+                            <b-spinner variant="primary" label="Text Centered"></b-spinner>
+                        </div>
                     </b-tab>
                 </b-tabs>
             </div>
@@ -71,7 +79,9 @@ export default {
                 {value: 'name', text: 'Full Name'},
             ],
             legislatorData: {},
+            legToBills: {}, 
             dataLoaded: false,
+            modalDataLoaded: false, 
             legislatorNames: [],
             legislators: {}, 
             showModal: false,
@@ -80,7 +90,7 @@ export default {
         }
     },
     created() {
-        const path = 'http://localHost:5000/getLegislators';
+        let path = 'http://localHost:5000/getLegislators';
         axios.get(path)
             .then((res) => {
                 this.legislatorData = res.data;
@@ -95,6 +105,7 @@ export default {
         })
         .catch((error) => {
             console.error(error);
+            alert("Error loading data, please try again")
         });
         //console.log("Finished", this.legislatorNames);
         //console.log("Legislator Dict:", this.legislators);
@@ -102,10 +113,9 @@ export default {
     methods: {
         search() {
             this.showModal = true; 
-            console.log(this.input, this.selected)
             try {
                 this.currentLegislator = this.legislators[this.input];
-                console.log(this.currentLegislator);
+                //console.log(this.currentLegislator);
                 this.currentName = this.currentLegislator['full_name'];
                 if(this.currentLegislator['senate_class'] != null) {
                     this.currentLegislator['position'] = "Senator";
@@ -114,13 +124,32 @@ export default {
                 else {
                     this.currentLegislator['position'] = "Representative";
                 }
+                let path = 'http://localHost:5000/getBills';
+                axios.get(path)
+                    .then((res) => {
+                    this.legToBills = res.data;
+                    this.modalDataLoaded = true;
+                    //console.log(this.legToBills)
+                    //console.log(this.legislatorData);
+                    //console.log(typeof(this.legislatorData));
+                    //console.log(this.legislatorData["0"])
+                    this.currentLegislator['bills'] = this.legToBills[this.currentLegislator['full_name']];
+                    //console.log(this.legToBills[this.currentLegislator['full_name']]);
+                    //console.log(this.currentLegislator['bills']);
+                    if (this.currentLegislator['bills'] == undefined) {
+                        this.currentLegislator['bills'] = ["This legislator has not worked on any of the last 100 bills."]
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("Error loading data, please try again")
+                });
             }
             catch (error) {
                 this.currentLegislator = {};
                 this.currentName = "Legislator Not Found!";
                 console.log(error)
             }
-            console.log(this.currentLegislator)
         }
     }
 }

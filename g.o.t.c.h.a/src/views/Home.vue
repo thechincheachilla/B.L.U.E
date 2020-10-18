@@ -27,7 +27,10 @@
               </b-card-text>
               <b-button variant="info" to="/legislation">Search</b-button>
             </b-card>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 2e88e2b5bcbe50838a3ef07d7ed8f5a971c9ceb4
           </b-card-group>
         </div>
       </b-container>
