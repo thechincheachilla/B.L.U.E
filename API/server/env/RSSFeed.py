@@ -12,7 +12,7 @@ class RSSFeedMain:
         self.billToLegis = self.extractSponsors(self.readCSV("bill_items.csv"))
         self.legisToBill = self.mapToBill(self.billToLegis)
 
-    
+
     def loadXML(self, url, filename, final_filename, singleOr100):
         # url of rss feed 
         response = requests.get(url) 
@@ -96,14 +96,6 @@ class RSSFeedMain:
             # writing data rows 
             writer.writerows(bill_items) 
 
-
-    def convertToJson(self, data, extendData):
-        billsDict = {}
-        billsDict[data] = extendData
-        with open('bills.txt', 'w') as outfile:
-            json.dump(data, outfile)
-
-
     def readCSV(self, csvfile):
         df = pd.read_csv(csvfile)
         df['guid'] = df.apply(lambda x : x['guid'][11:], axis=1)
@@ -164,11 +156,13 @@ class RSSFeedMain:
         return legislators
 
 
-    def convertToJson(self, data, extendData):
-        billsDict = {}
-        billsDict[data] = extendData
-        with open('bills.txt', 'w') as outfile:
-            json.dump(data, outfile)
+    def convertToJson(self):
+        data = self.legisToBill
+        jsonObject = json.dumps(data, indent = 4)
+        return jsonObject
+        #print(jsonObject)
+        #with open('bills.txt', 'w') as outfile:
+            #json.dump(data, outfile)
 
 
 
@@ -186,9 +180,10 @@ def main():
         #.     convertToJson(data, extendData)
     print(feed.mapToBill(datas))
     '''
-    print("billToLegis: ", feed.billToLegis)
-    print()
-    print("legisToBill: ", feed.legisToBill)
+    #print("billToLegis: ", feed.billToLegis)
+    #print()
+    #print("legisToBill: ", feed.legisToBill)
+
 
 
 if __name__ == '__main__':

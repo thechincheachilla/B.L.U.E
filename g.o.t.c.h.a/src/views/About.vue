@@ -19,6 +19,40 @@
       </b-col>
     </b-row>
     <h1 class="mt-4, mr-3" style="font-weight:bold; text-align:right">Meet Team B.L.U.E</h1>
+  
+    <b-card-group>
+      <b-card img-src="jen.jpg" img-alt="Card image" img-left>
+          <b-card-text>
+            Jennifer.
+          </b-card-text>
+      </b-card>
+
+      <b-card img-src="huy.jpg" img-alt="Card image" img-left>
+          <b-card-text>
+            Hoy.
+          </b-card-text>
+      </b-card>
+
+
+      <b-card img-src="rei.jpg" img-alt="Card image" img-left>
+          <b-card-text>
+            Reiden.
+          </b-card-text>
+      </b-card>
+
+
+      <b-card img-src="anson.jpg" img-alt="Card image" img-left>
+          <b-card-text>
+            Anson.
+          </b-card-text>
+      </b-card>
+
+      <b-card img-src="jar.jpg" img-alt="Card image" img-left>
+        <b-card-text>
+          Jared.
+        </b-card-text>
+      </b-card>
+    </b-card-group>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
     <div class="mt-4">
         <b-col>
-        <b-input-group>
+        <b-input-group v-if="dataLoaded">
             <template v-slot:prepend>
                 <b-form-select placeholder="Select:" v-model="selected" :options="searchType"></b-form-select>
             </template>
@@ -10,6 +10,7 @@
                 <b-button v-b-modal.info @click=search() variant="info">Search</b-button>
             </template>
         </b-input-group>
+        <b-spinner v-else>Loading...</b-spinner>
         </b-col>
         <b-modal id="info" :title="currentName">
             <div>
@@ -104,6 +105,7 @@ export default {
             console.log(this.input, this.selected)
             try {
                 this.currentLegislator = this.legislators[this.input];
+                console.log(this.currentLegislator);
                 this.currentName = this.currentLegislator['full_name'];
                 if(this.currentLegislator['senate_class'] != null) {
                     this.currentLegislator['position'] = "Senator";
@@ -116,6 +118,7 @@ export default {
             catch (error) {
                 this.currentLegislator = {};
                 this.currentName = "Legislator Not Found!";
+                console.log(error)
             }
             console.log(this.currentLegislator)
         }
