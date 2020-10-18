@@ -257,13 +257,19 @@ if __name__ == '__main__':
     def mapToBill(bills):
         legislators = {}
         
-        for bill, sponsors in bills.items():
-            #check sponsors for each bill
-            for sponsor in sponsors:
-                if sponsor not in legislators:
-                    legislators[sponsor] = [bill]
-                else:
-                    legislators[sponsor].append(bill)
+        for bill, lists in bills.items():
+            # lists is a dictionary of lists
+            combinedList = lists['sponsors']  + lists['cosponsors']
+            for sponsor in combinedList: # for every name in 'sponsors' list
+                words = sponsor.split()
+                words = words[1:-1]
+                words.append(words.pop(0)[:-1])
+                newName = ' '.join(words)
+                for legislator in legislators:
+                    if newName not in legislators:
+                        legislators[newName] = [bill]
+                    else:
+                        legislators[newName].append(bill)
 
         return legislators
 
