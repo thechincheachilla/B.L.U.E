@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 from legislator import Legislator as leg
-from RSSFeed import RSSFeedMain as bill
+from RSSFeed import RSSFeedMain as rsfm 
 
 # configuration
 DEBUG = True
@@ -19,11 +19,10 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 @app.route('/getLegislators', methods=['GET'])
 def get_legislators():
     return leg.parseLegislator("legislators-current.csv")
-'''
-def get_legislators():
-    raw = pd.read_csv("legislators-current.csv").T.to_dict()
-    return jsonify(raw)
-'''
+
+def get_bills():
+    billMaker = rsfm()
+    return billMaker.convertToJson()
 
 
 if __name__ == '__main__':

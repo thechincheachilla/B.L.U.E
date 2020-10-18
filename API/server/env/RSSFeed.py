@@ -12,7 +12,7 @@ class RSSFeedMain:
         self.billToLegis = self.extractSponsors(self.readCSV("bill_items.csv"))
         self.legisToBill = self.mapToBill(self.billToLegis)
 
-    
+
     def loadXML(self, url, filename, final_filename, singleOr100):
         # url of rss feed 
         response = requests.get(url) 
@@ -159,9 +159,9 @@ class RSSFeedMain:
         data = self.legisToBill
         jsonObject = json.dumps(data, indent = 4)
         return jsonObject
-        print(jsonObject)
-        with open('bills.txt', 'w') as outfile:
-            json.dump(data, outfile)
+        #print(jsonObject)
+        #with open('bills.txt', 'w') as outfile:
+            #json.dump(data, outfile)
 
 
 
@@ -182,7 +182,7 @@ def main():
     #print("billToLegis: ", feed.billToLegis)
     #print()
     #print("legisToBill: ", feed.legisToBill)
-    feed.convertToJson()
+
 
 
 if __name__ == '__main__':
