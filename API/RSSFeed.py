@@ -3,43 +3,21 @@ import requests
 import xml.etree.ElementTree as ET
 import pandas as pd
 
-'''
-mapToBill takes in a dictionary (with bills as keys and sponsors as values)
-and reverses the key mapping pair so that we can get a dictionary of sponsors
-mapped to what they sponsored
-'''
-def mapToBill(bills):
-    legislators = {}
-    
-    for bill, sponsors in bills.items():
-    '''
-    check sponsors for each bill
-    '''
-        for sponsor in sponsors:
-            if sponsor is not in legislators:
-                legislators[sponsor] = [bill]
-            else:
-                legislators[sponsor].append(bill)
-
-    return legislators
 
 
-
-
-
-def loadRSS(): 
+def loadRSS(url, filename, final_filename, isItem): 
     # url of rss feed 
-    url = 'https://www.govinfo.gov/rss/bills.xml'
-  
-    # creating HTTP response object from given url 
     response = requests.get(url) 
   
     # saving the xml file 
-    with open('newest_bills.xml', 'wb') as file: 
+    with open(filename, 'wb') as file: 
         file.write(response.content) 
 
+    parseXML(filename, final_filename, isItem)
 
-def parseXML(xmlfile): 
+
+
+def parseXML(xmlfile, final_filename, isItem): 
   
     # get root element
     root = ET.parse(xmlfile).getroot()
@@ -48,7 +26,8 @@ def parseXML(xmlfile):
     bill_items = [] 
   
     # iterate items 
-    for item in root.findall('./channel/item'): 
+    tag = '/item' if isItem else ''
+    for item in root.findall('./channel' + tag): 
   
         # empty bills dictionary 
         bills = {} 
@@ -62,13 +41,13 @@ def parseXML(xmlfile):
         bill_items.append(bills) 
       
     # return bill items list 
-    return bill_items 
+    savetoCSV(bill_items, final_filename, isItem)
 
 
-def savetoCSV(bill_items, filename): 
+def savetoCSV(bill_items, filename, isItem): 
   
     # specifying the fields for csv file 
-    fields = ['guid', 'title', 'pubDate', 'category', 'link', 'description'] 
+    fields = ['guid', 'title', 'pubDate', 'category', 'link', 'description'] if isItem else ['sponsors', 'cosponsors']
   
     # writing to csv file 
     with open(filename, 'w') as csvfile: 
@@ -85,18 +64,49 @@ def savetoCSV(bill_items, filename):
 
 def readCSV(csvfile):
     df = pd.read_csv(csvfile)
-    df['link'] = df.apply(lambda x : x['link'][2:-1], axis=1)
-    return df['link'].tolist()
+    df['guid'] = df.apply(lambda x : x['guid'][11:-3], axis=1)
+    return df['guid'].tolist()
+
+
+
+def extractSponsors(csv):
+	# bills = {}
+	# for guid in csv:
+	guid = csv[0]
+	url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/hr/BILLSTATUS-116' + guid + '.xml'
+	loadRSS(url, "bill_sponsors.xml", "sponsor_names.csv", False)
+
+
+
+
+'''
+mapToBill takes in a dictionary (with bills as keys and sponsors as values)
+and reverses the key mapping pair so that we can get a dictionary of sponsors
+mapped to what they sponsored
+'''
+def mapToBill(bills):
+    legislators = {}
+    
+    for bill, sponsors in bills.items():
+    	#check sponsors for each bill
+    	for sponsor in sponsors:
+            if sponsor not in legislators:
+                legislators[sponsor] = [bill]
+            else:
+                legislators[sponsor].append(bill)
+
+    return legislators
 
 
 def main(): 
 	# load rss from web to update existing xml file 
-    loadRSS() 
+    loadRSS('https://www.govinfo.gov/rss/bills.xml', "newest_bills.xml", "bill_items.csv", True) 
     # parse xml file 
-    bill_items = parseXML('newest_bills.xml') 
+    # bill_items = parseXML('newest_bills.xml') 
     # store news items in a csv file 
-    savetoCSV(bill_items, 'bill_items.csv')
+    # savetoCSV(bill_items, 'bill_items.csv')
     print(readCSV("bill_items.csv"))
+    extractSponsors(readCSV("bill_items.csv"))
  
 
 
