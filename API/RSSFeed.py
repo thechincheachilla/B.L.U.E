@@ -5,19 +5,21 @@ import pandas as pd
 
 
 
-def loadRS(url, filename, final_filename, isItem) 
+def loadXML(url, filename, final_filename, singleOr100):
     # url of rss feed 
     response = requests.get(url) 
   
     # saving the xml file 
     with open(filename, 'wb') as file: 
         file.write(response.content) 
+    if singleOr100 == '100':
+        parseXML(filename, final_filename)
+    elif singleOr100 == 'single':
+        parseXMLSponsor(filename)
 
-    parseXML(filename, final_filename, isItem)
 
 
-
-def parseXML(xmlfile, final_filename, isItem): 
+def parseXML(xmlfile, final_filename): 
   
     # get root element
     root = ET.parse(xmlfile).getroot()
@@ -26,8 +28,7 @@ def parseXML(xmlfile, final_filename, isItem):
     bill_items = [] 
   
     # iterate items 
-    tag = '/item' if isItem else ''
-    for item in root.findall('./channel' + tag): 
+    for item in root.findall('./channel/item'): 
   
         # empty bills dictionary 
         bills = {} 
@@ -41,13 +42,37 @@ def parseXML(xmlfile, final_filename, isItem):
         bill_items.append(bills) 
       
     # return bill items list 
-    savetoCSV(bill_items, final_filename, isItem)
+    savetoCSV(bill_items, final_filename)
+
+def parseXMLSponsor(xmlfile):
+    root = ET.parse(xmlfile).getroot()
+
+    bill_info = []
+
+    for item in root.findall('billStatus/bill'):
+        
+        info = {'summaries' : [], 'sponsors' : [], 'cosponsors' : []}
+
+        for child in item:
+            print(child.tag)
+            if child.tag == 'summaries':
+                for item in root.findall('billStatus/bill/summaries/billSummaries/item'):
+                    if child.tag == 'text':
+                        info[child.tag].append(child.text.encode('utf8'))
+            elif child.tag == 'sponsors' or child.tag == 'cosponsors':
+                for item in root.findall('billStatus/bill/sponsors/item'):
+                    if child.tag == 'fullName':
+                        info[child.tag].append(child.text.encode('utf8'))
+
+        bill_info.append(info)
+    # list of dictionaries where the keys are the tags and values are lists
+    return bill_info
 
 
-def savetoCSV(bill_items, filename, isItem): 
+def savetoCSV(bill_items, filename): 
   
     # specifying the fields for csv file 
-    fields = ['guid', 'title', 'pubDate', 'category', 'link', 'description'] if isItem else ['sponsors', 'cosponsors']
+    fields = ['guid', 'title', 'pubDate', 'category', 'link', 'description']
   
     # writing to csv file 
     with open(filename, 'w') as csvfile: 
@@ -67,14 +92,13 @@ def readCSV(csvfile):
     df['guid'] = df.apply(lambda x : x['guid'][11:-3], axis=1)
     return df['guid'].tolist()
 
-
-
 def extractSponsors(csv):
-	# bills = {}
-	# for guid in csv:
-	guid = csv[0]
-	url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/hr/BILLSTATUS-116' + guid + '.xml'
-	loadRSS(url, "bill_sponsors.xml", "sponsor_names.csv", False)
+	bills = {}
+	for guid in csv:
+        guid = csv[0]
+        url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/hr/BILLSTATUS-116' + guid + '.xml'
+        bills[guid] = loadXML(url, "bill_sponsors.xml", "sponsor_names.csv", "single")
+    return bills
 
 
 
@@ -100,13 +124,15 @@ def mapToBill(bills):
 
 def main(): 
 	# load rss from web to update existing xml file 
-    loadRSS('https://www.govinfo.gov/rss/bills.xml', "newest_bills.xml", "bill_items.csv", True) 
+    loadXML('https://www.govinfo.gov/rss/bills.xml', "newest_bills.xml", "bill_items.csv", "100") 
     # parse xml file 
     # bill_items = parseXML('newest_bills.xml') 
     # store news items in a csv file 
     # savetoCSV(bill_items, 'bill_items.csv')
     print(readCSV("bill_items.csv"))
-    extractSponsors(readCSV("bill_items.csv"))
+    datas = extractSponsors(readCSV("bill_items.csv"))
+    for data in datas:
+        print(data)
  
 
 
