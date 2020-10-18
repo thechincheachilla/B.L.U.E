@@ -55,7 +55,6 @@ def parseXMLSponsor(xmlfile):
     for item in root.findall('./bill'):
 
         info = {'summaries' : [], 'sponsors' : [], 'cosponsors' : [], 'titles' : []}
- 
         for child in item:
             if child.tag == 'summaries':
                 for item in root.findall('./bill/summaries/billSummaries/item/text'):
@@ -120,7 +119,7 @@ def extractSponsors(csv):
         url = 'https://www.govinfo.gov/bulkdata/BILLSTATUS/116/' + pre + '/BILLSTATUS-116' + guid + '.xml'
         #print(url)
         bills[guid] = loadXML(url, "bill_sponsors.xml", "sponsor_names.csv", "single")
-        return bills
+    return bills
 
 
 
@@ -150,7 +149,7 @@ def main():
     # parse xml file 
     # bill_items = parseXML('newest_bills.xml') 
     # store news items in a csv file 
-    # savetoCSV(bill_items, 'bill_items.csv')
+    #savetoCSV(bill_items, 'bill_items.csv')
     print(readCSV("bill_items.csv"))
     datas = extractSponsors(readCSV("bill_items.csv"))
     for data in datas:
