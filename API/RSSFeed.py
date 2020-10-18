@@ -2,7 +2,15 @@ import csv
 import requests
 import xml.etree.ElementTree as ET
 import pandas as pd
-  
+
+'''
+mapToBill takes in a dictionary (with bills as keys and sponsors as values)
+and reverses the key mapping pair so that we can get a dictionary of 
+'''
+def mapToBill()
+
+
+
 def loadRSS(): 
     # url of rss feed 
     url = 'https://www.govinfo.gov/rss/bills.xml'
