@@ -1,7 +1,7 @@
 <template>
     <div class="mt-4">
         <b-col>
-        <b-input-group>
+        <b-input-group v-if="dataLoaded">
             <template v-slot:prepend>
                 <b-dropdown :text="billType" variant="success">
                     <b-dropdown-item @click=updateBillSenate()>Senate Bill</b-dropdown-item>
@@ -13,6 +13,9 @@
                 <b-button @click=search() variant="info">Search</b-button>
             </template>
         </b-input-group>
+        <div v-else class="text-center">
+            <b-spinner variant="primary" label="Text Centered"></b-spinner>
+        </div>
         </b-col>
     </div>
 </template>
@@ -22,7 +25,9 @@ export default {
     name: "LegislationSearch",
     data() {
         return{
-            billType: "Bill Type:"
+            billType: "Bill Type:",
+            legislationData: {},
+            dataLoaded: false
         }
     },
     methods: {

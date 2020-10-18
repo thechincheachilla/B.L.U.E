@@ -20,6 +20,7 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 def get_legislators():
     return leg.parseLegislator("legislators-current.csv")
 
+@app.route('/getBills', methods=['GET'])
 def get_bills():
     billMaker = rsfm()
     return billMaker.convertToJson()
