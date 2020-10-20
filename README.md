@@ -1,4 +1,4 @@
-# B.L.U.E
+# G.O.T.C.H.A
 
 1. Download the latest version of Node.js here: https://nodejs.org/en/download/
 2. Install Vue into the g.o.t.c.h.a directory: 
